@@ -13,8 +13,8 @@ export class Filter extends Component {
           name="filter"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Enter the person's name"
-          value={this.prop.value}
-          onInput={this.prop.onChange}
+          value={this.value}
+          onInput={this.onChange}
         />
       </label>
     );
