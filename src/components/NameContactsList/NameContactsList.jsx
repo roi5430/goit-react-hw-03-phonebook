@@ -1,5 +1,6 @@
 import css from './NameContactsList.module.css';
 import { ContactItem } from 'components/ContactItem/ContactItem';
+
 export const NameContactsList = ({ items, onDelete }) => {
   return (
     <div className={css.contacts}>

@@ -21,9 +21,7 @@ export class App extends Component {
 
   addContact = (name, number) => {
     const { contacts } = this.state;
-    const checkName = contacts
-      .map(contact => contact.name.toLowerCase())
-      .some(contact => contact === name.toLowerCase());
+    const checkName = contacts.some(contact => contact === name.toLowerCase());
     if (!checkName) {
       this.setState(prevState => ({
         contacts: [
@@ -46,13 +44,6 @@ export class App extends Component {
 
   searchContact = evt => {
     this.setState({ filter: evt.currentTarget.value });
-  };
-
-  getContact = () => {
-    const { filter, contacts } = this.state;
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
   };
 
   deleteContact = contactsId => {
