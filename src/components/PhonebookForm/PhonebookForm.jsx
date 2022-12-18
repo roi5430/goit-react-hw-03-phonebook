@@ -1,4 +1,5 @@
 import css from './PhonebookForm.module.css';
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 
 export class PhonebookForm extends Component {
@@ -9,7 +10,7 @@ export class PhonebookForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.addContact(this.state);
+    this.props.onSubmit(this.state);
     this.reset();
   };
 
@@ -62,3 +63,7 @@ export class PhonebookForm extends Component {
     );
   }
 }
+
+PhonebookForm.propTypes = {
+  onSubmit: PropTypes.func,
+};

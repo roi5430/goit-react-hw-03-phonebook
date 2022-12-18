@@ -5,10 +5,6 @@ import { NameContactsList } from './NameContactsList/NameContactsList';
 import { Filter } from './Filter/Filter';
 
 export class App extends Component {
-  static defaultProps = {
-    initialContacts: [],
-  };
-
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -19,9 +15,11 @@ export class App extends Component {
     filter: '',
   };
 
-  addContact = (name, number) => {
+  addContact = ({ name, number }) => {
     const { contacts } = this.state;
-    const checkName = contacts.some(contact => contact === name.toLowerCase());
+    const checkName = contacts
+      .map(contact => contact.name.toLowerCase())
+      .some(contact => contact === name.toLowerCase());
     if (!checkName) {
       this.setState(prevState => ({
         contacts: [
@@ -54,11 +52,6 @@ export class App extends Component {
 
   render() {
     const { contacts, filter } = this.state;
-    const normalizedFilter = filter.toLocaleLowerCase();
-    const visibleContacts = contacts.filter(contact =>
-      contact.name.toLocaleLowerCase().includes(normalizedFilter)
-    );
-
     return (
       <section>
         <h1>Phonebook</h1>
@@ -66,7 +59,8 @@ export class App extends Component {
         <h2>Contacts</h2>
         <Filter onChange={this.searchContact} value={filter} />
         <NameContactsList
-          items={visibleContacts}
+          filter={filter}
+          items={contacts}
           onDelete={this.deleteContact}
         />
       </section>
