@@ -37,6 +37,7 @@ export class App extends Component {
   };
 
   showAlert = name => {
+    // console.log(name);
     window.alert(`${name} is already in contacts`);
   };
 
