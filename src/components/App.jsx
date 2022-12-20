@@ -15,6 +15,20 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const mekeContacts = localStorage.getItem('contacts');
+    const parse = JSON.parse(mekeContacts);
+    if (parse) {
+      this.setState({ ccontacts: parse });
+    }
+  }
+
+  componentDidUpdate(prevState, prevProps) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   addContact = ({ name, number }) => {
     const { contacts } = this.state;
     const checkName = contacts
@@ -32,13 +46,8 @@ export class App extends Component {
         ],
       }));
     } else {
-      this.showAlert();
+      window.alert(`${name} is already in contacts`);
     }
-  };
-
-  showAlert = name => {
-    // console.log(name);
-    window.alert(`${name} is already in contacts`);
   };
 
   searchContact = evt => {
