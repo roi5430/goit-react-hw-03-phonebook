@@ -18,12 +18,12 @@ export class App extends Component {
   componentDidMount() {
     const mekeContacts = localStorage.getItem('contacts');
     const parse = JSON.parse(mekeContacts);
-    if (parse) {
+    if (mekeContacts !== null) {
       this.setState({ ccontacts: parse });
     }
   }
 
-  componentDidUpdate(prevState, prevProps) {
+  componentDidUpdate(_, prevState) {
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
